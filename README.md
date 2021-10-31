@@ -1,56 +1,41 @@
+# Firmware Marlin for 3D Printer Elf Creativity and Two Trees Sapphire
+Конфигурация <a href="https://github.com/MarlinFirmware/Marlin">официальной прошивки  Marlin</a> 2.0.7.2
+для 3д принтера Elf Creativity, это аналог Two Trees Sapphire на базе прошивки от Сергея Панина (https://github.com/Sergey1560/Marlin_FB4S)
 
-```C
-#if ENABLED(EEPROM_SETTINGS)
-/*
-MKS Robin EEPROM:
-EEPROM_SD
-EEPROM_W25Q
-*/
-#define EEPROM_W25Q
+## ВНИМАНИЕ
+Не тестировалась с Two Trees Sapphire, проверяйте версию платы и все остальное. Напишите мне если все будет работать.
+Ускорения, рывки не калибровались. 
+На моем эльфе только перенесен фидер на голову, остальное в стоке.
 
-#if ENABLED(EEPROM_W25Q)
-#undef SDCARD_EEPROM_EMULATION
-#undef USE_REAL_EEPROM
-#undef FLASH_EEPROM_EMULATION
-#undef SRAM_EEPROM_EMULATION
-#undef I2C_EEPROM_AT24C16
-#define SPI_EEPROM_W25Q
-#define SPI_EEPROM
-#define SPI_EEPROM_OFFSET 0x700000
-#define USE_WIRED_EEPROM    1
-#define MARLIN_EEPROM_SIZE  2048
-#endif
+## ЧТО ВКЛЮЧЕНО
+* Включен LA, возможность изменить ускорения, джерки, скорость и т.п.
+* Включение выключение датчика филамента
+* Включен и уже откалиброван PID стола и хотенда в стоке, поток
+* Включен MESH BED LEVELING (сетка кривизны с ручной калибровкой)
+* Включен LEVEL BED CORNERS (парковка по углам для настроки зазора сопло-стол)
 
-#if ENABLED(EEPROM_SD)
-#define SDCARD_EEPROM_EMULATION
-#undef USE_REAL_EEPROM
-#undef FLASH_EEPROM_EMULATION
-#undef SRAM_EEPROM_EMULATION
-#undef I2C_EEPROM_AT24C16
-#undef SPI_EEPROM_W25Q
-#undef USE_WIRED_EEPROM
-#define MARLIN_EEPROM_SIZE  4096
-#endif
+## ВАЖНО !!!
+Если вы меняли шкивы на другое кол-во зубов, винт оси Z, клеяли утеплитель на обратную поверхность стола, меняли экструдер, нужно окалибровать ПИД, откалибровать ИЛИ указать свои параметры шагов на миллиметр. 
 
-#define EEPROM_AUTO_INIT  // Init EEPROM automatically on any errors.
-#endif
-```
-```
-/**
- * TFT Type - Select your Display type
- *
- * Available options are:
- *   MKS_TS35_V2_0,
- *   MKS_ROBIN_TFT24, MKS_ROBIN_TFT28, MKS_ROBIN_TFT32, MKS_ROBIN_TFT35,
- *   MKS_ROBIN_TFT43, MKS_ROBIN_TFT_V1_1R
- *   TFT_TRONXY_X5SA, ANYCUBIC_TFT35, LONGER_LK_TFT28
- *   TFT_GENERIC
- *
- * For TFT_GENERIC, you need to configure these 3 options:
- *   Driver:     TFT_DRIVER
- *               Current Drivers are: AUTO, ST7735, ST7789, ST7796, R61505, ILI9328, ILI9341, ILI9488
- *   Resolution: TFT_WIDTH and TFT_HEIGHT
- *   Interface:  TFT_INTERFACE_FSMC or TFT_INTERFACE_SPI
- */
-#define MKS_ROBIN_TFT35
-```
+## КАК УСТАНОВИТЬ
+* ЕСЛИ НУЖЕН БИНАРНИК, ПИШИТЕ
+* Скомпилировать в VSCode или в подобных платформах
+* Скопировать progect.pin на SD карту, вставить в слот, включить принтер. Процесс займет около 10 секунд. 
+* После прошивки рекомендую сразу вынуть какрту и удалить файл прошивки, иначе прошьется при следующем включении опять.
+* Первым делом, перед настройками, сделать инициализацию ипрум.
+
+### ВИДЕО
+* <a href="https://youtu.be/hBkV4Tjz-6s">Обзор Longer LK4</a>
+* <a href="https://youtu.be/4ykhpaEbTpE">О доработках</a>
+* <a href="https://www.youtube.com/channel/UCzI016x7MItBtQCJiSWI7yA">Канал YouTube</a>
+
+### Связь
+Вопросы, обсуждения, предложения через следующие сообщества:
+* [Telegram группа](https://t.me/technarr)
+* [Группа в VK](https://vk.com/technarrus)
+
+### 🍵 ПОДДЕРЖАТЬ АВТОРА ЗА ТРУДЫ: 
+* https://boosty.to/technarru
+* https://www.donationalerts.com/r/technarrus
+* https://yoomoney.ru/to/41001171922875 
+* https://www.paypal.me/technarrus
