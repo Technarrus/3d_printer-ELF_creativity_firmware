@@ -1,0 +1,56 @@
+
+```C
+#if ENABLED(EEPROM_SETTINGS)
+/*
+MKS Robin EEPROM:
+EEPROM_SD
+EEPROM_W25Q
+*/
+#define EEPROM_W25Q
+
+#if ENABLED(EEPROM_W25Q)
+#undef SDCARD_EEPROM_EMULATION
+#undef USE_REAL_EEPROM
+#undef FLASH_EEPROM_EMULATION
+#undef SRAM_EEPROM_EMULATION
+#undef I2C_EEPROM_AT24C16
+#define SPI_EEPROM_W25Q
+#define SPI_EEPROM
+#define SPI_EEPROM_OFFSET 0x700000
+#define USE_WIRED_EEPROM    1
+#define MARLIN_EEPROM_SIZE  2048
+#endif
+
+#if ENABLED(EEPROM_SD)
+#define SDCARD_EEPROM_EMULATION
+#undef USE_REAL_EEPROM
+#undef FLASH_EEPROM_EMULATION
+#undef SRAM_EEPROM_EMULATION
+#undef I2C_EEPROM_AT24C16
+#undef SPI_EEPROM_W25Q
+#undef USE_WIRED_EEPROM
+#define MARLIN_EEPROM_SIZE  4096
+#endif
+
+#define EEPROM_AUTO_INIT  // Init EEPROM automatically on any errors.
+#endif
+```
+```
+/**
+ * TFT Type - Select your Display type
+ *
+ * Available options are:
+ *   MKS_TS35_V2_0,
+ *   MKS_ROBIN_TFT24, MKS_ROBIN_TFT28, MKS_ROBIN_TFT32, MKS_ROBIN_TFT35,
+ *   MKS_ROBIN_TFT43, MKS_ROBIN_TFT_V1_1R
+ *   TFT_TRONXY_X5SA, ANYCUBIC_TFT35, LONGER_LK_TFT28
+ *   TFT_GENERIC
+ *
+ * For TFT_GENERIC, you need to configure these 3 options:
+ *   Driver:     TFT_DRIVER
+ *               Current Drivers are: AUTO, ST7735, ST7789, ST7796, R61505, ILI9328, ILI9341, ILI9488
+ *   Resolution: TFT_WIDTH and TFT_HEIGHT
+ *   Interface:  TFT_INTERFACE_FSMC or TFT_INTERFACE_SPI
+ */
+#define MKS_ROBIN_TFT35
+```
